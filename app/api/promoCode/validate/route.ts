@@ -1,0 +1,49 @@
+import client from "@/sanity/sanity.client";
+import { groq } from "next-sanity";
+import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(req: NextRequest, res: NextResponse) {
+  try {
+    const { code, totalPrice } = await req.json();
+    const promoCode = await client.fetch(
+      groq`*[_type == 'promoCode' && code == "${code}"][0]`
+    );
+    if (!promoCode) {
+      return NextResponse.json({ error: "Promo code not found." });
+    }
+    if (promoCode.basePrice > totalPrice) {
+      return NextResponse.json({
+        error: `Minimum Value must be: ${promoCode.basePrice}`,
+      });
+    }
+    if (
+      promoCode.expirationDate &&
+      new Date(promoCode.expirationDate) < new Date()
+    ) {
+      return NextResponse.json({ error: "Promo code has expired." });
+    }
+
+    if (promoCode.usageLimit && promoCode.usageLimit <= 0) {
+      return NextResponse.json({
+        error: "Promo code has reached its usage limit.",
+      });
+    }
+
+    // Apply discount logic based on discount type
+    let discountedPrice = 0;
+
+    if (promoCode.discountType === "amount") {
+      discountedPrice = totalPrice - promoCode.discountValue;
+    } else if (promoCode.discountType === "percentage") {
+      discountedPrice =
+        totalPrice - (totalPrice * promoCode.discountValue) / 100;
+    }
+
+    // Ensure discounted price is not negative
+    discountedPrice = Math.max(0, discountedPrice);
+
+    return NextResponse.json({ success: true, discountedPrice });
+  } catch (err) {
+  } finally {
+  }
+}

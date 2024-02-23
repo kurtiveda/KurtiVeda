@@ -1,0 +1,105 @@
+"use client";
+import React, { useState } from "react";
+import NavBanner from "./NavBanner";
+import Image from "next/image";
+import logo from "../public/logo.png";
+import Link from "next/link";
+
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import Search from "./Search";
+import { SearchIcon, ShoppingBagIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+
+const NavBar = () => {
+  const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
+
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <NavBanner />
+      <div className="w-full text-center px-4 font-lato uppercase font-light text-2xl flex justify-evenly">
+        <div
+          className={cn(
+            "text-[10px] h-full flex w-1/3 justify-start items-center gap-6 font-bold tracking-[0.2rem] pl-4 text-center"
+          )}>
+          <Link
+            href={"/shop"}
+            className="relative py-5 font-semibold group h-full hover:text-[#A77737]"
+            onClick={() =>
+              localStorage.setItem("category", JSON.stringify([""]))
+            }>
+            <p className="nav">SHOP</p>
+          </Link>
+          <Link
+            href={"#"}
+            className="relative py-5 font-semibold group h-full hover:text-[#A77737]">
+            <p className="nav">ABOUT</p>
+          </Link>
+          <Link
+            href={"#"}
+            className="relative py-5 font-semibold group h-full hover:text-[#A77737]">
+            <p className="nav">CONTACT</p>
+          </Link>
+        </div>
+        <Link
+          href={"/"}
+          className="w-1/3 text-center flex justify-center items-center"
+          onClick={() =>
+            localStorage.setItem("category", JSON.stringify([""]))
+          }>
+          Tara Textiles
+        </Link>
+        <div className="text-sm flex w-1/3 justify-end items-center gap-4 font-bold">
+          {/* <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="flex justify-center items-center">
+                  <Link
+                    href={"#"}
+                    className="relative font-semibold group h-full hover:text-[#A77737]">
+                    <p className="nav">CONTACT</p>
+                  </Link>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>Link</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu> */}
+          <Link href={`/cart`}>
+            <Button
+              className={cn(
+                "bg-none hover:bg-transparent hover:scale-125 transition",
+                isSearchActive && "hidden"
+              )}
+              variant={"ghost"}>
+              <ShoppingBagIcon className="w-5 mr-2" />
+            </Button>
+          </Link>
+          <Button
+            className={cn(
+              "bg-none hover:bg-transparent hover:scale-125 transition",
+              isSearchActive && "hidden"
+            )}
+            variant={"ghost"}
+            onClick={() => setIsSearchActive(true)}>
+            <SearchIcon className="w-5 mr-2" />
+          </Button>
+          {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default NavBar;
