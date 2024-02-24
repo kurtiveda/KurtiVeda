@@ -65,6 +65,7 @@ function CartPromo({
       setIsApplying(false);
       setApplied(false);
       setError("");
+      console.log("promo error", err);
       toast.error("Something went wrong, please try again");
     }
   }

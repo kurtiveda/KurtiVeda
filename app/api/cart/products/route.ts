@@ -13,8 +13,8 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  // const userId = headers().get("userId");
-  const { userId } = await req.json();
+  const userId = headers().get("userId");
+  // const { userId } = await req.json();
   try {
     const { id, name, price, Quantity, size }: CartProduct = await req.json();
 

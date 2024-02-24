@@ -3,8 +3,8 @@ import { groq } from "next-sanity";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  const { code, totalPrice, userId } = await req.json();
   try {
-    const { code, totalPrice, userId } = await req.json();
     const promoCode = await client.fetch(
       groq`*[_type == 'promoCode' && code == "${code}"][0]`
     );
@@ -59,6 +59,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json({ success: true, discountedPrice });
   } catch (err) {
+    return NextResponse.json({ error: err });
   } finally {
   }
 }

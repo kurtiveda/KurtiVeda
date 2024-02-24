@@ -49,8 +49,12 @@ function CartButtons({
           price: product.price,
           Quantity: quant,
           size: size,
-          userId: userId,
-        })
+        }),
+        {
+          headers: {
+            userId: userId,
+          },
+        }
       );
       toast.success("Product Added to Cart Successfully");
       console.log("productData on submit", prod.data);
