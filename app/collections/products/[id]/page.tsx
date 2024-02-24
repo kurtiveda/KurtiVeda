@@ -46,18 +46,18 @@ const Page = async ({ params }: { params: { id: string } }) => {
           </div>
           <div className="tablet:w-[50%] xsPhone:w-[100%] flex flex-col justify-start items-start sticky top-0 overflow-hidden ring-offset-2 py-[3rem] tablet:pl-[3rem] laptop:pl-[4rem] xsPhone:px-[2rem] gap-[2rem]">
             <div className="w-full space-y-3">
-              <p className="laptop:text-5xl tablet:text-4xl xsPhone:text-3xl font-playfair tracking-wide text-neutral-700 uppercase">
+              <p className="laptop:text-4xl tablet:text-3xl xsPhone:text-2xl font-playfair tracking-wider text-neutral-700 ">
                 {product.Title}
               </p>
-              <p className="laptop:text-xl tablet:text-lg xsPhone:text-md font-lato font-light text-neutral-500">
+              <p className="laptop:text-lg tablet:text-md xsPhone:text-sm font-lato font-light text-neutral-500">
                 {product.line_description}
               </p>
             </div>
             <div className="flex-col justify-start items-start">
-              <p className="laptop:text-3xl xsPhone:text-2xl font-playfair">
+              <p className="laptop:text-2xl xsPhone:text-2xl font-lato tracking-widest">
                 ₹ {product.Price}
               </p>
-              <p className=" font-lato xsPhone:text-sm font-light text-muted-foreground">
+              <p className=" font-lato xsPhone:text-[13px] font-light text-muted-foreground">
                 Tax included
               </p>
             </div>

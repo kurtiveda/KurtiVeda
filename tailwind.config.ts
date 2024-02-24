@@ -88,7 +88,7 @@ const config = {
       },
       fontFamily: {
         lato: ["Lato", "sans-serif"],
-        playfair: ["Playfiar Display", "serif"],
+        playfair: ["Playfair Display", "serif"],
       },
     },
   },

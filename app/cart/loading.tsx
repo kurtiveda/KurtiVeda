@@ -5,8 +5,9 @@ import React from "react";
 function loading() {
   return (
     <div>
-      <Header />
-      <p className="font-playfair text-4xl w-full text-center py-10">Cart</p>
+      <p className="font-playfair text-3xl w-full text-center py-10">
+        Your Bag
+      </p>
       <hr />
 
       <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col">

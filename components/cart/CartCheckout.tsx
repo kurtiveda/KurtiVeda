@@ -1,7 +1,7 @@
 import React from "react";
 import { auth } from "@/auth";
 import { getAddresses } from "@/controller/products";
-import CartPayment from "./CartPayment";
+
 import CartAddress from "./CartAddress";
 import { Addresses } from "@/types";
 
@@ -11,16 +11,15 @@ async function CartCheckout({ totalPrice }: { totalPrice: number }) {
   const addresses: Addresses = await getAddresses(userId);
   console.log(addresses);
   return (
-    <div>
-      {/* <CartPayment totalPrice={totalPrice} /> */}
-      <div>
+    <>
+      <div className="w-full">
         <CartAddress
           addresses={addresses}
           totalPrice={totalPrice}
           userId={userId}
         />
       </div>
-    </div>
+    </>
   );
 }
 

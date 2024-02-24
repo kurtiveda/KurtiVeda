@@ -25,12 +25,12 @@ export default async function Home() {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <Categories categories={categories} />
       <Banner images={images} />
       <Arrivals />
       <MadeInIndia />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

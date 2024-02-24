@@ -11,11 +11,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (!promoCode) {
       return NextResponse.json({ error: "Promo code not found." });
     }
-    if (promoCode.basePrice > totalPrice) {
-      return NextResponse.json({
-        error: `Minimum Value must be: ${promoCode.basePrice}`,
-      });
-    }
+
     if (
       promoCode.expirationDate &&
       new Date(promoCode.expirationDate) < new Date()
@@ -38,26 +34,18 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     });
 
-    if (userPromo?.promoUsed === true) {
-      return NextResponse.json({
-        error: "You have Already Used this Promo Code",
+    if (userPromo?.promoUsed === true && promoCode.usageLimit === 1) {
+      await prisma?.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          promoUsed: false,
+        },
       });
     }
 
-    // Apply discount logic based on discount type
-    let discountedPrice = 0;
-
-    if (promoCode.discountType === "amount") {
-      discountedPrice = totalPrice - promoCode.discountValue;
-    } else if (promoCode.discountType === "percentage") {
-      discountedPrice =
-        totalPrice - (totalPrice * promoCode.discountValue) / 100;
-    }
-
-    // Ensure discounted price is not negative
-    discountedPrice = Math.max(0, discountedPrice);
-
-    return NextResponse.json({ success: true, discountedPrice });
+    return NextResponse.json({ success: true });
   } catch (err) {
   } finally {
   }

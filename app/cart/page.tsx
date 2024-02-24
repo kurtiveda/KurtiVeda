@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import Header from "@/components/Header/Header";
 import CartCheckout from "@/components/cart/CartCheckout";
-import CartPayment from "@/components/cart/CartPayment";
+
 import CartCards from "@/components/cart/cartCards";
 import client from "@/sanity/sanity.client";
 import { CartProduct, ProductType } from "@/types";
@@ -78,40 +78,53 @@ async function page() {
   if (totalPrice === 0) {
     return (
       <div>
-        <Header />
         <hr />
-        <p className="font-playfair text-4xl w-full text-center py-10">Cart</p>
+        <p className="font-playfair text-3xl w-full text-center py-10">
+          Your Bag
+        </p>
         <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
-          Cart is Empty
+          Your Bag is Empty
         </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <Header />
+    <>
       <hr />
-      <p className="font-playfair text-4xl w-full text-center py-10">Cart</p>
-      <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col">
-        <div className="laptop:w-[70%] w-full">
-          {productsData[0]?.products?.map((product) => {
-            return (
-              <div key={product.id}>
-                <CartCards
-                  id={product.id}
-                  size={product.size}
-                  quantity={product.Quantity}
-                />
-              </div>
-            );
-          })}
-        </div>
-        <div className="w-[30%] border h-full sticky top-0">
-          <CartCheckout totalPrice={totalPrice} />
+      <div className="py-10">
+        <p className="font-playfair text-3xl w-full text-center pb-10">
+          Your Bag
+        </p>
+        <div className="w-full flex justify-center items-center">
+          <div className="flex justify-center laptop:items-start xsPhone:items-center laptop:flex-row xsPhone:flex-col laptop:w-[80%] xsPhone:w-[90%] gap-8">
+            <div className="laptop:w-[70%] w-full">
+              <hr className="mb-4" />
+              {productsData[0]?.products?.map((product) => {
+                return (
+                  <>
+                    <div className="">
+                      <div key={product.id}>
+                        <CartCards
+                          id={product.id}
+                          size={product.size}
+                          quantity={product.Quantity}
+                        />
+                      </div>
+                      <hr className="my-4" />
+                    </div>
+                  </>
+                );
+              })}
+            </div>
+
+            <div className="laptop:w-[40%] xsPhone:w-[95%] h-full sticky top-0 laptop:border-l laptop:pl-8">
+              <CartCheckout totalPrice={totalPrice} />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

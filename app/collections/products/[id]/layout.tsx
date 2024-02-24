@@ -5,8 +5,7 @@ import React, { Suspense } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
-      <Header />
+    <div className="pb-10">
       <Suspense fallback={<PageLoader />}>{children}</Suspense>
     </div>
   );

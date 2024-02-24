@@ -11,6 +11,7 @@ import { Loader2Icon, ShoppingBagIcon } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Session } from "next-auth";
+import WhatsAppButton from "../ui/Whatsapp";
 
 function CartButtons({
   product,
@@ -51,7 +52,7 @@ function CartButtons({
           userId: userId,
         })
       );
-      toast("Product Added to Cart Successfully");
+      toast.success("Product Added to Cart Successfully");
       console.log("productData on submit", prod.data);
     } catch (err) {
       console.log(err);
@@ -64,7 +65,7 @@ function CartButtons({
     }
   }
   return (
-    <div className="py-4">
+    <div className="py-4 w-full">
       <form
         method="post"
         onSubmit={(e) => {
@@ -87,8 +88,8 @@ function CartButtons({
             onChange={(e) => setQuant(Number(e.target.value))}
           />
         </div>
-        <div className="flex flex-col justify-center items-center w-full gap-6">
-          <div className="flex justify-center items-center laptop:gap-4 tablet:gap-2 xsPhone:gap-4 flex-wrap text-xs font-lato tracking-widest">
+        <div className="flex  justify-start items-start w-full gap-6">
+          <div className="w-fit flex justify-center items-center laptop:gap-4 tablet:gap-2 xsPhone:gap-4 flex-wrap text-xs font-lato tracking-widest">
             {product?.sizes?.map((size, index) => {
               return (
                 <div
@@ -109,14 +110,14 @@ function CartButtons({
           <Button
             type="submit"
             disabled={submitting === true || !session}
-            className="w-full border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
+            className="w-fit border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
             {submitting ? (
               <div className="flex items-center justify-center gap-2">
-                Adding to Cart <Loader2Icon className="animate-spin" />
+                Adding <Loader2Icon className="animate-spin" />
               </div>
             ) : (
               <div className="flex items-center justify-center gap-2">
-                Add to cart <ShoppingBagIcon className="w-5 h-5" />
+                Add to Bag <ShoppingBagIcon className="w-5 h-5" />
               </div>
             )}
           </Button>

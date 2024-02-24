@@ -5,6 +5,7 @@ import Header from "@/components/Header/Header";
 import dynamic from "next/dynamic";
 import CrispWithNoSSR from "@/lib/Crisp";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/components/Footers/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,8 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <CrispWithNoSSR />
       <body className={inter.className}>
+        <Header />
         {children}
-        <Toaster />
+        <Toaster className="bg-white" richColors />
+        <Footer />
       </body>
     </html>
   );

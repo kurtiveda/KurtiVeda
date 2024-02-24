@@ -26,9 +26,8 @@ const Layout = async ({
 
   return (
     <>
-      <Header />
       <Separator />
-      <div className="flex flex-col justify-center items-start">
+      <div className="flex flex-col justify-center items-start pb-10">
         <div className="w-full pt-8 ">
           <BreadCrumbs />
         </div>

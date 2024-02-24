@@ -67,6 +67,7 @@ model User {
   address Address[]
   orders Orders[]
   role          Roles  @default(USER)
+  promoUsed Boolean @default(false)
   Active Boolean?
 
   @@map("users")

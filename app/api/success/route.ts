@@ -6,7 +6,7 @@ import { auth } from "@/auth";
 import { prisma } from "@/prisma/index";
 
 export async function POST(req: Request, res: NextResponse) {
-  const { transaction } = await req.json();
+  const { transaction, userId } = await req.json();
   const merchantId = process.env.NEXT_PUBLIC_MID;
   console.log(merchantId);
   const transactionId = transaction;
@@ -37,6 +37,21 @@ export async function POST(req: Request, res: NextResponse) {
   console.log("r===", response.data.code);
   // return NextResponse.json(response.data.code);
   if (response.data.code == "PAYMENT_SUCCESS") {
+    const user = await prisma.user.findFirst({
+      where: { id: userId },
+      select: { promoUsed: true },
+    });
+    if (user?.promoUsed === false) {
+      await prisma?.user.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          promoUsed: true,
+        },
+      });
+    }
+
     return NextResponse.json(true);
   } else {
     return NextResponse.json(false);
