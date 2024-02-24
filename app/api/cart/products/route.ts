@@ -8,7 +8,7 @@ import {
 } from "@/controller/products";
 import { CartProduct } from "@/types";
 
-import { Prisma } from "@prisma/client";
+import { prisma } from "@/prisma/index";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 

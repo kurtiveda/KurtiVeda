@@ -1,6 +1,7 @@
 import client from "@/sanity/sanity.client";
 import { groq } from "next-sanity";
 import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/prisma/index";
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const { code, totalPrice, userId } = await req.json();
@@ -59,7 +60,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json({ success: true, discountedPrice });
   } catch (err) {
-    return NextResponse.json({ error: err });
+    console.log(err);
+    return NextResponse.json({ error: "Promo Error" });
   } finally {
   }
 }
