@@ -13,12 +13,9 @@ import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
-  const session = await auth();
-
-  const userId = session?.user?.id;
+  // const userId = headers().get("userId");
+  const { userId } = await req.json();
   try {
-    // const { userId } = await req.json();
-
     const { id, name, price, Quantity, size }: CartProduct = await req.json();
 
     const isCartPresent = await checkCartExists(userId as string);
@@ -28,7 +25,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     if (isCartPresent) {
       const existingCart = await prisma?.carts.findUnique({
         where: {
-          userId: userId,
+          userId: userId as string,
           cart: {
             some: {
               status: "IN_CART",
@@ -48,7 +45,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       } else {
         const resp = await prisma?.carts.update({
           where: {
-            userId: userId,
+            userId: userId as string,
           },
           data: {
             cart: {
