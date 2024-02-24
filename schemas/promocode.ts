@@ -37,6 +37,11 @@ const promoCode = {
       title: "Usage Limit",
       type: "number",
     },
+    {
+      name: "countdown",
+      title: "Enable Countdown",
+      type: "boolean",
+    },
   ],
 };
 export default promoCode;

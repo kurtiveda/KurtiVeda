@@ -138,3 +138,11 @@ export async function makePayment(
   const redirect = response.data.data.instrumentResponse.redirectInfo.url;
   return router.push(redirect);
 }
+
+export async function getPromo() {
+  const promoCode = await client.fetch(
+    groq`*[_type == 'promoCode' && countdown == true]`
+  );
+
+  return promoCode;
+}

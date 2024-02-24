@@ -4,10 +4,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/prisma";
 import EmailProvider from "next-auth/providers/nodemailer";
 import { Resend } from "resend";
-// import MagicLinkEmail from "@/emails/MagicLinkEmail";
+import MagicLinkEmail from "@/emails/MagicLinkEmail";
 import { renderAsync } from "@react-email/components";
+import Email from "next-auth/providers/nodemailer";
 
-// const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY);
 
 enum Roles {
   ADMIN,
@@ -36,7 +37,7 @@ export const { handlers, auth } = NextAuth({
           email: profile.email,
           name: profile.name,
           image: profile.image,
-          role: profile.role,
+          role: profile.role ?? Roles[1],
         };
       },
       authorization: {
@@ -45,24 +46,33 @@ export const { handlers, auth } = NextAuth({
         },
       },
     }),
-    // EmailProvider({
-    //   id: "resend",
-    //   sendVerificationRequest: async (params) => {
-    //     const { identifier, url } = params;
-    //     const { host } = new URL(url);
+    EmailProvider({
+      id: "resend",
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM,
+      sendVerificationRequest: async (params) => {
+        const { identifier, url } = params;
+        const { host } = new URL(url);
 
-    //     //! Below Line is Important in RESEND v2 as this will fix the webpack error during builds
-    //     const rct = await renderAsync(MagicLinkEmail({ url, host }));
+        //     //! Below Line is Important in RESEND v2 as this will fix the webpack error during builds
+        const rct = await renderAsync(MagicLinkEmail({ url, host }));
 
-    //     await resend.emails.send({
-    //       from: "onboarding@resend.dev",
-    //       to: [identifier],
-    //       subject: `Log into ${host}`,
-    //       text: `Sign into ${host}`,
-    //       html: rct,
-    //     });
-    //   },
-    // }),
+        await resend.emails.send({
+          from: "onboarding@resend.dev",
+          to: [identifier],
+          subject: `Log into ${host}`,
+          text: `Sign into ${host}`,
+          html: rct,
+        });
+      },
+    }),
   ],
 
   callbacks: {
@@ -75,10 +85,10 @@ export const { handlers, auth } = NextAuth({
       },
     }),
   },
-  //   pages: {
-  //     signIn: `${process.env.NEXT_PUBLIC_APP_URL}/users/sign-in`,
-  //     verifyRequest: `${process.env.NEXT_PUBLIC_APP_URL}/users/verify-request`,
-  //     error: `/users/error`,
-  //     newUser: `${process.env.NEXT_PUBLIC_APP_URL}/users/details`,
-  //   },
+  pages: {
+    signIn: `${process.env.NEXT_PUBLIC_APP_URL}/users/sign-in`,
+    verifyRequest: `${process.env.NEXT_PUBLIC_APP_URL}/users/verify-request`,
+    error: `/users/error`,
+    newUser: `${process.env.NEXT_PUBLIC_APP_URL}/users/details`,
+  },
 });

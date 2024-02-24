@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { auth } from "@/auth";
 import Arrivals from "@/components/Arrivals/Arrivals";
+import Header from "@/components/Header/Header";
 import Accordian from "@/components/Products/Accordian";
 import CartButtons from "@/components/Products/CartButtons";
 import ImageMagnify from "@/components/Products/ImageMagnify";
@@ -25,6 +26,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
+      <Header />
       <Separator />
       <div className="w-full pt-8 ">
         <BreadCrumbs customPath={["shop", `${product.Title}`]} />

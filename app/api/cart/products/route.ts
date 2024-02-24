@@ -7,16 +7,17 @@ import {
   removeProductById,
 } from "@/controller/products";
 import { CartProduct } from "@/types";
+
 import { Prisma } from "@prisma/client";
 import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  const session = await auth();
+
+  const userId = session?.user?.id;
   try {
     // const { userId } = await req.json();
-    const session = await auth();
-
-    const userId = session?.user?.id;
 
     const { id, name, price, Quantity, size }: CartProduct = await req.json();
 
@@ -84,9 +85,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
 }
 
 export async function GET(req: NextRequest) {
+  const userId = headers().get("userId");
   try {
     // const session = await auth();
-    const userId = headers().get("userId");
 
     const products = await getProducts(userId as string);
     console.log("product in cart ", products);
@@ -101,13 +102,11 @@ export async function GET(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
+  const userId = headers().get("userId");
+  const productId = headers().get("productId");
+  const size = headers().get("size");
   try {
     // const session = await auth();
-    const userId = headers().get("userId");
-
-    const productId = headers().get("productId");
-
-    const size = headers().get("size");
 
     console.log("size:", size);
 

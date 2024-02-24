@@ -1,6 +1,6 @@
 import axios from "axios";
 import sha256 from "crypto-js/sha256";
-import { headers } from "next/headers";
+
 import { NextRequest, NextResponse } from "next/server";
 import { v4 } from "uuid";
 

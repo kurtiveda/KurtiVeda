@@ -1,7 +1,7 @@
 import sha256 from "crypto-js/sha256";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { headers } from "next/headers";
+
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/index";
 

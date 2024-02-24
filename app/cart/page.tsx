@@ -91,6 +91,7 @@ async function page() {
 
   return (
     <>
+      <Header />
       <hr />
       <div className="py-10">
         <p className="font-playfair text-3xl w-full text-center pb-10">

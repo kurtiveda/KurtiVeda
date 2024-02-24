@@ -5,9 +5,10 @@ import Header from "@/components/Header/Header";
 import Banner from "@/components/Banner/Banner";
 import Arrivals from "@/components/Arrivals/Arrivals";
 import Categories from "@/components/Header/Categories";
-import { getCategory } from "@/lib/utils";
+import { getCategory, getPromo } from "@/lib/utils";
 import MadeInIndia from "@/components/Footers/MadeInIndia";
 import Footer from "@/components/Footers/Footer";
+import Countdown from "@/components/ui/Countdown";
 
 export default async function Home() {
   const BannerImages: BannerType[] = await getBanner();
@@ -23,14 +24,23 @@ export default async function Home() {
   const categories = await getCategory();
   console.log(categories);
 
+  const expiryDate = await getPromo();
+  console.log("date", expiryDate);
+
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Categories categories={categories} />
       <Banner images={images} />
       <Arrivals />
+      {expiryDate.map((promo: any, index: number) => {
+        return (
+          <Countdown expiration={new Date(promo.expirationDate)} key={index} />
+        );
+      })}
       <MadeInIndia />
-      {/* <Footer /> */}
+
+      <Footer />
     </div>
   );
 }

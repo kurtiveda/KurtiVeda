@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Header from "@/components/Header/Header";
 import { addOrders, setStatus } from "@/controller/products";
 import axios from "axios";
 import React from "react";
@@ -27,7 +28,12 @@ async function page({ params }: { params: { trId: string } }) {
     return <div>Wrong Transaction ID</div>;
   }
 
-  return <div>Payment Successful</div>;
+  return (
+    <div>
+      <Header />
+      Payment Successful
+    </div>
+  );
 }
 
 export default page;
