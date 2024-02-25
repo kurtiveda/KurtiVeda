@@ -10,6 +10,7 @@ import { ChevronRight, EyeIcon, SearchIcon, X } from "lucide-react";
 import MediumCards from "../Products/MediumCards";
 import { ProdCards } from "../Products/ProdCards";
 import Link from "next/link";
+import ProductImage from "../Products/ProductImage";
 
 const Search = ({
   setIsSearchActive,
@@ -26,7 +27,7 @@ const Search = ({
     const regexPattern: string = "(?:" + searchTitle + ")";
     client
       .fetch<ProductType[]>(
-        `*[_type == "Products" && Title match '${regexPattern}'][0...5]{
+        `*[_type == "Products" && Title match '${regexPattern} ' && out_of_stock == false][0...5]{
       _id,
       Title,
       description,
@@ -87,49 +88,30 @@ const Search = ({
           <div>Loading</div>
         ) : (
           <>
-            <div className="flex justify-center items-center tablet:gap-[3rem] phone:gap-4 xsPhone:gap-2 flex-wrap ">
+            <div className="grid tablet:grid-cols-4 xsPhone:grid-cols-1 phone:grid-cols-2 justify-center items-center tablet:gap-[3rem] phone:gap-4 xsPhone:gap-2 flex-wrap px-6 ">
               {products?.map((prod, index) => {
                 return (
                   <div
                     key={Math.random() + index}
-                    className="flex flex-col w-fit"
+                    className="flex flex-col justify-center items-center w-fit"
                     onClick={() => setIsSearchActive(false)}>
-                    <ProdCards
-                      imageUrl={prod.productMedia.map((image) => {
-                        return image.asset.url;
-                      })}
+                    <ProductImage
+                      imageUrl={prod.productMedia.map((p) => p.asset.url)}
                       prodId={prod._id}
-                      imageClassName="object-cover rounded-bl-none rounded-br-none"
-                      className="w-fit cursor-pointer"
-                      key={Math.random() + index}>
-                      <div
-                        className=" w-full rounded-xl p-4 "
-                        key={Math.random() + index}>
-                        <EyeIcon key={Math.random() + index} />
-                      </div>
-                    </ProdCards>
-                    {/* {prod.productMedia.map((img, index) => {
-                    return (
-                      <Image
-                        src={img.asset.url}
-                        key={prod._id}
-                        alt={"dp"}
-                        width={120}
-                        height={120}></Image>
-                    );
-                  })} */}
+                    />
+
                     <div
                       className=" w-full rounded-xl phone:p-4 phone:pl-4 text-center"
                       key={Math.random() + index}>
                       <div className="font-lato" key={Math.random() + index}>
                         <h1
-                          className="tablet:text-[14px] font-medium phone:text-xs"
+                          className="tablet:text-[14px] font-medium xsPhone:text-xs"
                           key={Math.random() + index}>
                           {prod.Title}
                         </h1>
                       </div>
                       <p
-                        className="font-lato text-sm font-bold mt-1"
+                        className="font-lato phone:text-sm xsPhone:text-xs font-bold mt-1"
                         key={Math.random() + index}>
                         ₹ {prod.Price}
                       </p>

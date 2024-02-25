@@ -78,6 +78,7 @@ async function page() {
   if (totalPrice === 0) {
     return (
       <div>
+        <Header />
         <hr />
         <p className="font-playfair text-3xl w-full text-center py-10">
           Your Bag

@@ -5,6 +5,7 @@ import React from "react";
 function loading() {
   return (
     <div>
+      <Header />
       <p className="font-playfair text-3xl w-full text-center py-10">
         Your Bag
       </p>

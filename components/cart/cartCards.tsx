@@ -22,13 +22,13 @@ async function CartCards({
       <div className="flex justify-center items-center relative h-fit tablet:gap-10 xsPhone:gap-4">
         <Link
           href={`${process.env.NEXT_PUBLIC_APP_URL}/collections/products/${product[0]._id}`}
-          className="hover:scale-105 transition ease-in xsPhone:w-1/2 tablet:w-auto">
+          className="hover:scale-105 transition ease-in xsPhone:w-1/2 tablet:w-[15%]">
           <div className="w-full flex justify-start items-center">
             {
               <img
                 src={product[0].productMedia[0].asset.url}
                 alt={"assetURL"}
-                className="object-contain tablet:w-fit xsPhone:w-fit tablet:h-[10rem] h-fit"
+                className="object-contain tablet:w-fit xsPhone:w-fit h-[10rem]"
               />
             }
           </div>

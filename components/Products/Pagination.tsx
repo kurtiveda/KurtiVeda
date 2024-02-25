@@ -18,7 +18,7 @@ function Pagination({
   const [loading, setLoading] = useState(false);
 
   const page = searchParams.get("page") ?? "1";
-  const pageSize = searchParams.get("pageSize") ?? "10";
+  const pageSize = searchParams.get("pageSize") ?? "12";
 
   async function incNumber() {
     try {

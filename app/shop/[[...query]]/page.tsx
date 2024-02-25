@@ -18,7 +18,7 @@ const Page = async ({
   searchParams: any;
 }) => {
   const page = searchParams["page"] ?? "1";
-  const pageSize = searchParams["pageSize"] ?? "10";
+  const pageSize = searchParams["pageSize"] ?? "12";
 
   const start = Number(page - 1) * Number(pageSize);
   const end = start + Number(pageSize);
