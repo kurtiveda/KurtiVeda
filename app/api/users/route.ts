@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       where: { id: userId },
     });
     if (!user) {
-      return new Error("User not found");
+      return NextResponse.json("User not found");
     }
     const obj = {
       id: randomUUID(),
@@ -46,7 +46,7 @@ export async function PUT(req: NextRequest) {
       where: { id: userId },
     });
     if (!user) {
-      return new Error("User not found");
+      return NextResponse.json("User not found");
     }
     const obj = {
       id: addressId,
@@ -86,7 +86,7 @@ export async function GET(req: NextRequest) {
     const addresses = await getAddresses(userId as string);
 
     if (!addresses) {
-      return new Error("No Addresses available for this user");
+      return NextResponse.json("No Addresses available for this user");
     }
 
     const currentAddress = addresses.filter(
@@ -95,7 +95,8 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(currentAddress);
   } catch (err) {
-    return NextResponse.json({ error: err });
+    console.log(err);
+    return NextResponse.json("GET ADDRESS ERROR");
   }
 }
 
@@ -106,7 +107,7 @@ export async function DELETE(req: NextRequest) {
     const addresses = await getAddresses(userId as string);
 
     if (!addresses) {
-      return new Error("No Addresses available for this user");
+      return NextResponse.json("No Addresses available for this user");
     }
 
     const newAddresses = addresses.filter(
