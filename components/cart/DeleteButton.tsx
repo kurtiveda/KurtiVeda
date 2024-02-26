@@ -7,6 +7,15 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
 function DeleteButton({
   productId,
   userId,
@@ -49,7 +58,7 @@ function DeleteButton({
   }
   return (
     <div>
-      <Button
+      {/* <Button
         onClick={(e) => {
           handleDelete(e);
         }}
@@ -60,7 +69,31 @@ function DeleteButton({
         ) : (
           <Trash2Icon className="w-5 h-5 text-[#A77737] fill-[#A77737]/10" />
         )}
-      </Button>
+      </Button> */}
+      <Dialog>
+        <DialogTrigger>
+          <Trash2Icon className="w-5 h-5 text-[#A77737] fill-[#A77737]/10" />
+        </DialogTrigger>
+        <DialogContent className="bg-white space-y-4">
+          <DialogHeader className="space-y-4">
+            <DialogTitle className="uppercase font-lato font-bold tracking-wider">
+              Are you sure?
+            </DialogTitle>
+            <DialogDescription className="uppercase font-lato tracking-widest text-xs text-neutral-400">
+              This Action Will Remove the Product from your bag
+            </DialogDescription>
+          </DialogHeader>
+          <Button
+            className="bg-red-700 hover:bg-red-800 rounded-xl font-lato tracking-widest uppercase"
+            onClick={(e) => handleDelete(e)}>
+            {isDeleting ? (
+              <LoaderIcon className="animate-spin w-5 h-5 text-[#A77737] " />
+            ) : (
+              <>Remove Product</>
+            )}
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -76,7 +76,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     });
     return NextResponse.json(resp);
   } catch (err) {
-    console.log(err);
+    console.log("Cart POST err === ", err);
     return NextResponse.json(err);
   }
 }
@@ -93,6 +93,7 @@ export async function GET(req: NextRequest) {
     }
     return NextResponse.json(products);
   } catch (err) {
+    console.log("Cart GET err === ", err);
     return NextResponse.json(err);
   } finally {
   }
@@ -117,7 +118,7 @@ export async function DELETE(req: NextRequest) {
     }
     return NextResponse.json(products);
   } catch (err) {
-    console.log(err);
+    console.log("Cart Delete err === ", err);
     return NextResponse.json(err);
   } finally {
   }

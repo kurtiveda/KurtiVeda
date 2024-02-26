@@ -11,6 +11,7 @@ datasource db {
 }
 
 type Address{
+  id String
   name String
   phone String
   zip Int

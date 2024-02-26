@@ -43,7 +43,6 @@ export type Orders = {
   street: string;
   products: [{ id: string; Quantity: number; size: string }];
   date: Date;
-  userId: string;
 };
 
 export const Columns: ColumnDef<Orders>[] = [
@@ -248,63 +247,6 @@ export const Columns: ColumnDef<Orders>[] = [
             </DialogContent>
           </Dialog>
         </div>
-      );
-    },
-  },
-  {
-    accessorKey: "userId",
-  },
-  {
-    id: "statusChange",
-    header: "Change Status",
-    cell: ({ row }) => {
-      const trid = String(row.getValue("id"));
-      const userId = String(row.getValue("userId"));
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              className="flex justify-center items-center p-4 bg-sky-600 hover:bg-sky-700 hover:text-white rounded-full text-white font-lato">
-              Update Status
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Choose Status</DropdownMenuLabel>
-            <DropdownMenuItem className="font-lato text-sm">
-              <OrderStateUpdate trid={trid} userId={userId} status="PENDING" />
-            </DropdownMenuItem>
-            <DropdownMenuItem className="font-lato text-sm">
-              <OrderStateUpdate
-                trid={trid}
-                userId={userId}
-                status="PROCESSING"
-              />
-            </DropdownMenuItem>
-            <DropdownMenuItem className="font-lato text-sm">
-              <OrderStateUpdate
-                trid={trid}
-                userId={userId}
-                status="DELIVERED"
-              />
-            </DropdownMenuItem>
-            <DropdownMenuItem className="font-lato text-sm">
-              <OrderStateUpdate
-                trid={trid}
-                userId={userId}
-                status="EXCHANGE_PROCESSING"
-              />
-            </DropdownMenuItem>
-            <DropdownMenuItem className="font-lato text-sm">
-              <OrderStateUpdate
-                trid={trid}
-                userId={userId}
-                status="EXCHANGE_DONE"
-              />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
       );
     },
   },

@@ -20,8 +20,9 @@ import Search from "./Search";
 import { SearchIcon, ShoppingBagIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import UserAuthOptions from "./UserAuthOptions";
 
-const NavBar = () => {
+const NavBar = ({ userId }: { userId: string }) => {
   const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
 
   return (
@@ -95,7 +96,23 @@ const NavBar = () => {
             onClick={() => setIsSearchActive(true)}>
             <SearchIcon className="w-5 mr-2" />
           </Button>
+
           {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
+          <div
+            className={cn(
+              "bg-none hover:bg-transparent hover:scale-110 transition",
+              isSearchActive && "hidden"
+            )}>
+            {userId !== undefined && userId ? (
+              <UserAuthOptions />
+            ) : (
+              <Link href={`${process.env.NEXT_PUBLIC_APP_URL}/api/auth/signin`}>
+                <Button className="rounded-full  bg-[#A77737] font-lato uppercase font-semibold text-xs tracking-widest">
+                  Login
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

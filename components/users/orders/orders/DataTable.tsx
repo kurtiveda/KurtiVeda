@@ -72,8 +72,8 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className="rounded-md border">
-        <div className="flex items-center justify-center py-4 space-x-4 px-4">
+      <div className="rounded-md">
+        <div className="flex items-center justify-center py-4 space-x-4">
           <Input
             placeholder="Filter Status"
             value={
@@ -81,30 +81,6 @@ export function DataTable<TData, TValue>({
             }
             onChange={(event) =>
               table.getColumn("status")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-          <Input
-            placeholder="Filter City"
-            value={(table.getColumn("city")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("city")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-          <Input
-            placeholder="Filter State"
-            value={(table.getColumn("state")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("state")?.setFilterValue(event.target.value)
-            }
-            className="max-w-sm"
-          />
-          <Input
-            placeholder="Filter TrID"
-            value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("id")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />

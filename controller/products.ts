@@ -22,7 +22,7 @@ export async function createCart(userId: string, products: CartProduct) {
 
     if (resp) return resp.cart;
   } catch (err) {
-    console.log(err);
+    console.log("create cart err === ", err);
     return Promise.reject(err);
   } finally {
   }
@@ -40,7 +40,7 @@ export async function checkCartExists(userId: string) {
     if (resp) return true;
     return false;
   } catch (err) {
-    console.log(err);
+    console.log("check cart err === ", err);
     return Promise.reject(err);
   } finally {
   }
@@ -108,7 +108,7 @@ export async function addProduct(userId: string, products: CartProduct) {
 
     return updatedCart.cart;
   } catch (err) {
-    console.log(err);
+    console.log("add products err === ", err);
     return false;
   } finally {
   }
@@ -139,7 +139,7 @@ export async function getProducts(userId: string) {
     console.log("filterproducts===", filteredProducts);
     return filteredProducts;
   } catch (err) {
-    console.log(err);
+    console.log("get Products error === ", err);
   } finally {
   }
 }
@@ -156,6 +156,7 @@ export async function getAddresses(userId: string) {
     });
     return addresses?.address;
   } catch (err) {
+    console.log(err);
   } finally {
   }
 }

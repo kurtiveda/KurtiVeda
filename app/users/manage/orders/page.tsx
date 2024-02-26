@@ -1,4 +1,4 @@
-import { DataTable } from "@/components/admin/orders/DataTable";
+import { DataTable } from "@/components/users/orders/orders/DataTable";
 import axios from "axios";
 import React from "react";
 import { Columns } from "./columns";
@@ -18,7 +18,6 @@ export type Orders = {
   city: string;
   street: string;
   date: Date;
-  userId: string;
   products: [{ id: string; Quantity: number; size: string }];
 };
 
@@ -30,18 +29,19 @@ async function page() {
     }
 
     const orders = await axios.get(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/orders`
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/userOrders`,
+      {
+        headers: {
+          userId: session.user.id as string,
+        },
+      }
     );
     console.log("orders.data", orders.data);
 
     let ordersData: Orders[] = [];
 
-    let userID = "";
-
     orders.data.map((order: any) => {
-      userID = order.userId;
       return order.orders.map((o: OrdersType) => {
-        console.log(userID);
         ordersData.push({
           amount: o.Tr_amt,
           id: o.Tr_id,
@@ -54,7 +54,6 @@ async function page() {
           zip: o.delivery.zip,
           status: o.del_status,
           products: o.products,
-          userId: userID,
         });
       });
     });

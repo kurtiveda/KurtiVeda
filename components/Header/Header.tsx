@@ -10,12 +10,15 @@ import { EyeIcon } from "lucide-react";
 import MediumCards from "../Products/MediumCards";
 import Arrivals from "../Arrivals/Arrivals";
 import MobNav from "./MobNav";
+import { auth } from "@/auth";
 
 const Header = async () => {
+  const session = await auth();
+  const userId = session?.user?.id;
   return (
     <>
       <div className="xsPhone:hidden tablet:block bg-white">
-        <NavBar />
+        <NavBar userId={userId as string} />
       </div>
       <div className="tablet:hidden xsPhone:block">
         <MobNav />

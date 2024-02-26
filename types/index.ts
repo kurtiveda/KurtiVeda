@@ -39,6 +39,7 @@ export type CartProduct = {
 
 export type Addresses =
   | {
+      id: string;
       name: string;
       phone: string;
       zip: number;
