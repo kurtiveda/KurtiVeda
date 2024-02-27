@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Carousel } from "flowbite-react";
 
 // const COUNTDOWN_TARGET: any = new Date("2024-02-31T23:59:59");
 
