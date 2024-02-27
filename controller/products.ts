@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { prisma } from "@/prisma/index";
 import { CartProduct } from "@/types";
+import { Carts } from "@prisma/client";
 
 export async function createCart(userId: string, products: CartProduct) {
   try {
@@ -46,21 +47,25 @@ export async function checkCartExists(userId: string) {
   }
 }
 
-export async function addProduct(userId: string, products: CartProduct) {
+export async function addProduct(
+  userId: string,
+  products: CartProduct,
+  existingCart: Carts
+) {
   try {
-    const existingCart = await prisma.carts.findUnique({
-      where: {
-        userId: userId,
-        cart: {
-          some: {
-            status: "IN_CART",
-          },
-        },
-      },
-      select: {
-        cart: true,
-      },
-    });
+    // const existingCart = await prisma.carts.findUnique({
+    //   where: {
+    //     userId: userId,
+    //     cart: {
+    //       some: {
+    //         status: "IN_CART",
+    //       },
+    //     },
+    //   },
+    //   select: {
+    //     cart: true,
+    //   },
+    // });
 
     if (!existingCart) {
       throw new Error("Cart not found");
@@ -117,6 +122,13 @@ export async function addProduct(userId: string, products: CartProduct) {
 export async function getProducts(userId: string) {
   try {
     // console.log("userId", userId);
+
+    // const cart = await prisma.carts.findRaw({
+    //   filter: { "cart.status": "IN_CART" },
+    //   options: { projection: { cart: true, _id: false } },
+    // });
+
+    // console.log("raw cart === ", cart[0]);
 
     const products = await prisma.carts.findMany({
       where: {

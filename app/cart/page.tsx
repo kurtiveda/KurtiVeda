@@ -1,15 +1,15 @@
 import { auth } from "@/auth";
 import Header from "@/components/Header/Header";
 import CartCheckout from "@/components/cart/CartCheckout";
-
 import CartCards from "@/components/cart/cartCards";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import client from "@/sanity/sanity.client";
 import { CartProduct, ProductType } from "@/types";
-import { Separator } from "@radix-ui/react-separator";
 import axios from "axios";
-import { LockIcon } from "lucide-react";
+import { LockIcon, Trash2Icon } from "lucide-react";
 import { groq } from "next-sanity";
-import { Router } from "next/router";
 import React from "react";
 
 async function page() {
@@ -37,6 +37,7 @@ async function page() {
       },
     }
   );
+  console.log("products data", products.data);
   if (products.data === "No products") {
     return (
       <div>
@@ -63,10 +64,10 @@ async function page() {
   async function calculateTotalCartPrice(cart: CartProduct[]) {
     let totalPrice = 0;
 
-    for (const product of cart) {
-      const productPrice = await getProductPriceById(product.id);
+    for (const product in cart) {
+      const productPrice = await getProductPriceById(cart[product].id);
       console.log(productPrice);
-      totalPrice += productPrice * product.Quantity;
+      totalPrice += productPrice * cart[product].Quantity;
     }
 
     console.log("tp:===", totalPrice);

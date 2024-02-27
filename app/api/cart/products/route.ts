@@ -34,13 +34,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
         },
       });
       if (existingCart) {
-        const resp = await addProduct(userId as string, {
-          id,
-          name,
-          price,
-          Quantity,
-          size,
-        });
+        const resp = await addProduct(
+          userId as string,
+          {
+            id,
+            name,
+            price,
+            Quantity,
+            size,
+          },
+          existingCart
+        );
         return NextResponse.json(resp);
       } else {
         const resp = await prisma?.carts.update({

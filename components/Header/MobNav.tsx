@@ -11,19 +11,36 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "../ui/button";
-import { HammerIcon, MenuIcon, SearchIcon } from "lucide-react";
+import {
+  HammerIcon,
+  MenuIcon,
+  SearchIcon,
+  ShoppingBagIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import Search from "./Search";
 import NavBanner from "./NavBanner";
+import UserAuthOptions from "./UserAuthOptions";
+import { BannerType } from "@/types";
 
-const MobNav = () => {
+const MobNav = ({
+  userId,
+  banner,
+}: {
+  userId: string;
+  banner: BannerType[];
+}) => {
   const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
   return (
     <>
-      <NavBanner />
+      <NavBanner banner={banner} />
       <div className="flex justify-between items-center p-4 ">
-        <div className="">
+        <div
+          className={cn(
+            "w-1/3 flex  justify-start items-center gap-4",
+            isSearchActive && "w-fit"
+          )}>
           <Drawer>
             <DrawerTrigger>
               <MenuIcon />
@@ -34,7 +51,7 @@ const MobNav = () => {
                   "text-[12px] flex flex-col w-fit py-[5rem] justify-start items-center gap-4 font-bold tracking-[0.2rem] pl-4 text-center"
                 )}>
                 <Link
-                  href={"#"}
+                  href={"/shop"}
                   className="relative py-4 font-semibold group h-full hover:text-[#A77737]">
                   <p className="nav">SHOP</p>
                 </Link>
@@ -51,17 +68,34 @@ const MobNav = () => {
               </div>
             </DrawerContent>
           </Drawer>
+          <Link href={`/cart`} className={cn(isSearchActive && "hidden")}>
+            <Button
+              className={cn(
+                "bg-none hover:bg-transparent hover:scale-125 transition",
+                isSearchActive && "hidden"
+              )}
+              variant={"ghost"}>
+              <ShoppingBagIcon className="w-5" />
+            </Button>
+          </Link>
         </div>
-        <p
+        <Link
+          href={"/"}
           className={cn(
-            " text-center flex justify-center items-center font-lato uppercase font-light text-xl ",
+            "text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl",
             isSearchActive && "hidden"
           )}>
-          Tara Textiles
-        </p>
+          <p
+            className={cn(
+              " text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl ",
+              isSearchActive && "hidden"
+            )}>
+            Tara Textiles
+          </p>
+        </Link>
         <div
           className={cn(
-            "flex justify-center items-center",
+            "flex justify-end items-center gap-4 w-1/3",
             isSearchActive && "w-[90%]"
           )}>
           <Button
@@ -71,9 +105,24 @@ const MobNav = () => {
             )}
             variant={"ghost"}
             onClick={() => setIsSearchActive(true)}>
-            <SearchIcon className="w-5 mr-2" />
+            <SearchIcon className="w-5 " />
           </Button>
           {isSearchActive && <Search setIsSearchActive={setIsSearchActive} />}
+          <div
+            className={cn(
+              "bg-none hover:bg-transparent hover:scale-110 transition",
+              isSearchActive && "hidden"
+            )}>
+            {userId !== undefined && userId ? (
+              <UserAuthOptions />
+            ) : (
+              <Link href={`${process.env.NEXT_PUBLIC_APP_URL}/api/auth/signin`}>
+                <Button className="rounded-full px-2 bg-[#A77737] font-lato uppercase font-semibold text-xs tracking-widest">
+                  Login
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </>

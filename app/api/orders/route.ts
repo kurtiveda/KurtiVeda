@@ -1,4 +1,3 @@
-export const revalidate = 0;
 import { NextResponse } from "next/server";
 import { prisma } from "@/prisma/index";
 

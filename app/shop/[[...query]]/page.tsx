@@ -28,15 +28,13 @@ const Page = async ({
     : await getProducts(start, end);
 
   return (
-    <Suspense fallback={<CardLoaders />}>
-      <div className="flex flex-col justify-center items-center gap-6">
-        <AllProducts products={products!} />
-        <Pagination
-          hasPreviousPage={start > 0}
-          hasNextPage={end <= products?.length!}
-        />
-      </div>
-    </Suspense>
+    <div className="flex flex-col justify-center items-center gap-6">
+      <AllProducts products={products!} />
+      <Pagination
+        hasPreviousPage={start > 0}
+        hasNextPage={end <= products?.length!}
+      />
+    </div>
   );
 };
 

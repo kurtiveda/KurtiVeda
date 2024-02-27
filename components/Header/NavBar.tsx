@@ -21,13 +21,20 @@ import { SearchIcon, ShoppingBagIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import UserAuthOptions from "./UserAuthOptions";
+import { BannerType } from "@/types";
 
-const NavBar = ({ userId }: { userId: string }) => {
+const NavBar = ({
+  userId,
+  banner,
+}: {
+  userId: string;
+  banner: BannerType[];
+}) => {
   const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <NavBanner />
+      <NavBanner banner={banner} />
       <div className="w-full text-center px-4 font-lato uppercase font-light text-2xl flex justify-evenly">
         <div
           className={cn(
@@ -60,23 +67,10 @@ const NavBar = ({ userId }: { userId: string }) => {
           }>
           Tara Textiles
         </Link>
-        <div className="text-sm flex w-1/3 justify-end items-center gap-4 font-bold">
-          {/* <NavigationMenu>
-            <NavigationMenuList>
-              <NavigationMenuItem>
-                <NavigationMenuTrigger className="flex justify-center items-center">
-                  <Link
-                    href={"#"}
-                    className="relative font-semibold group h-full hover:text-[#A77737]">
-                    <p className="nav">CONTACT</p>
-                  </Link>
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <NavigationMenuLink>Link</NavigationMenuLink>
-                </NavigationMenuContent>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu> */}
+        <div
+          className={cn(
+            "text-sm flex w-1/3 justify-end items-center gap-4 font-bold"
+          )}>
           <Link href={`/cart`}>
             <Button
               className={cn(

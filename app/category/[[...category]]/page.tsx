@@ -1,4 +1,5 @@
 "use client";
+
 import AllProducts from "@/components/Products/AllProducts";
 import CardLoaders from "@/components/Products/CardLoaders";
 import Pagination from "@/components/Products/Pagination";
@@ -37,7 +38,7 @@ function Page({
     categories: [params.category],
   };
 
-  localStorage.setItem("category", JSON.stringify(params.category));
+  localStorage.setItem("categories", JSON.stringify(params.category));
 
   const query = encodeURIComponent(JSON.stringify(filters));
 

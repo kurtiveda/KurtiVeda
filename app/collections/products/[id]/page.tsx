@@ -32,7 +32,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
         <BreadCrumbs customPath={["shop", `${product.Title}`]} />
       </div>
 
-      <div className="w-screen flex justify-center items-center ">
+      <div className="w-screen flex justify-center items-center xsPhone:mt-8 tablet:mt-0">
         <div className="flex tablet:flex-row xsPhone:flex-col justify-center items-start xsPhone:w-[100%] tablet:w-[90%] tablet:mt-[2rem]">
           <div className="w-[50%] tablet:grid grid-cols-2 gap-4 relative xsPhone:hidden">
             {product.productMedia.map((prod, index) => {

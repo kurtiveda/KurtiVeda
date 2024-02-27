@@ -65,13 +65,21 @@ const Filter = ({ categories, query }: FilterComponentProps) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Filters and Sort</Button>
+        <Button
+          variant="outline"
+          className="border-[#A77737] text-[#A77737] hover:text-[#A77737] hover:bg-slate-300/20 mt-8 rounded-none">
+          Filters and Sort
+        </Button>
       </DrawerTrigger>
       <DrawerContent className="bg-white w-full">
         <ProfileForm className="px-4 w-full" categories={categories} />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <Button
+              variant="outline"
+              className="border-[#A77737] text-[#A77737] hover:text-[#A77737] hover:bg-slate-300/20 rounded-none">
+              Cancel
+            </Button>
           </DrawerClose>
         </DrawerFooter>
       </DrawerContent>
@@ -96,9 +104,10 @@ export function ProfileForm({
 
   useEffect(() => {
     const currentFilters = JSON.parse(localStorage.getItem("presetFilters")!);
-    const curCat = JSON.parse(localStorage.getItem("category")!);
+    const curCat = JSON.parse(localStorage.getItem("categories")!);
     setCurrentCategory(curCat);
-    // setPresetFilters({ ...currentFilters, categories: curCat });
+
+    setPresetFilters({ ...currentFilters, categories: curCat });
   }, [setPresetFilters]);
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -132,7 +141,7 @@ export function ProfileForm({
     } else {
       updatedCategories = presetFilters.categories.filter((c) => c !== _id);
       setCurrentCategory([""]);
-      localStorage.setItem("category", JSON.stringify([""]));
+      localStorage.setItem("categories", JSON.stringify([""]));
     }
 
     setPresetFilters({
@@ -262,7 +271,7 @@ export function ProfileForm({
                 "presetFilters",
                 JSON.stringify({ sort: "", sizes: [], categories: [] })
               );
-              localStorage.setItem("category", JSON.stringify([""]));
+              localStorage.setItem("categories", JSON.stringify([""]));
               router.replace("/shop");
             }}>
             Clear

@@ -92,8 +92,8 @@ function CartButtons({
             onChange={(e) => setQuant(Number(e.target.value))}
           />
         </div>
-        <div className="flex  justify-start items-start w-full gap-6">
-          <div className="w-fit flex justify-center items-center laptop:gap-4 tablet:gap-2 xsPhone:gap-4 flex-wrap text-xs font-lato tracking-widest">
+        <div className="flex xsPhone:flex-col tablet:flex-row justify-start items-start w-full gap-6">
+          <div className="w-fit  flex justify-center items-center laptop:gap-4 tablet:gap-2 xsPhone:gap-4 flex-wrap text-xs font-lato tracking-widest">
             {product?.sizes?.map((size, index) => {
               return (
                 <div
@@ -103,7 +103,7 @@ function CartButtons({
                     setActive(size);
                   }}
                   className={cn(
-                    "border laptop:w-[3rem] laptop:h-[3rem] cursor-pointer xsPhone:w-[2.5rem] xsPhone:h-[2.5rem] text-center border-[#A77737] text-[#A77737] flex justify-center items-center hover:bg-[#c58f48] hover:text-white transition",
+                    "border laptop:w-[3rem] laptop:h-[3rem] cursor-pointer xsPhone:w-[3rem] xsPhone:h-[3rem] text-center border-[#A77737] text-[#A77737] flex justify-center items-center hover:bg-[#c58f48] hover:text-white transition",
                     active === size && "bg-[#c58f48] text-white"
                   )}>
                   {size}
@@ -114,7 +114,7 @@ function CartButtons({
           <Button
             type="submit"
             disabled={submitting === true || !session}
-            className="w-fit border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
+            className="tablet:w-fit xsPhone:w-full border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
             {submitting ? (
               <div className="flex items-center justify-center gap-2">
                 Adding <Loader2Icon className="animate-spin" />

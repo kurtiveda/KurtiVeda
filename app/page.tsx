@@ -9,6 +9,7 @@ import { getCategory, getPromo } from "@/lib/utils";
 import MadeInIndia from "@/components/Footers/MadeInIndia";
 import Footer from "@/components/Footers/Footer";
 import Countdown from "@/components/ui/Countdown";
+import CountDownCarousel from "@/components/PromoCode/CountDownCarousel";
 
 export default async function Home() {
   const BannerImages: BannerType[] = await getBanner();
@@ -27,17 +28,15 @@ export default async function Home() {
   const expiryDate = await getPromo();
   console.log("date", expiryDate);
 
+  // Create a function to get the category
+
   return (
     <div>
       <Header />
       <Categories categories={categories} />
       <Banner images={images} />
       <Arrivals />
-      {expiryDate.map((promo: any, index: number) => {
-        return (
-          <Countdown expiration={new Date(promo.expirationDate)} key={index} />
-        );
-      })}
+      <CountDownCarousel promoCodes={expiryDate} />
       <MadeInIndia />
 
       <Footer />

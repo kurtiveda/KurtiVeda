@@ -15,13 +15,14 @@ import { auth } from "@/auth";
 const Header = async () => {
   const session = await auth();
   const userId = session?.user?.id;
+  const banner = await getBanner();
   return (
     <>
       <div className="xsPhone:hidden tablet:block bg-white">
-        <NavBar userId={userId as string} />
+        <NavBar userId={userId as string} banner={banner} />
       </div>
       <div className="tablet:hidden xsPhone:block">
-        <MobNav />
+        <MobNav userId={userId as string} banner={banner} />
       </div>
       {/* <Categories /> */}
     </>
