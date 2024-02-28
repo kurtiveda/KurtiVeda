@@ -10,11 +10,11 @@ import { ArrowRight } from "lucide-react";
 
 const Categories = ({ categories }: { categories: Categories[] }) => {
   return (
-    <div className="bg-[#FAF7F1] py-6 text-center space-y-6 px-1">
+    <div className="bg-[#FAF7F1] py-10 text-center space-y-8 px-1">
       <p className="uppercase font-lato text-[11px] font-black tracking-[0.2rem]">
         Shop by Category
       </p>
-      <div className=" bg-[#FAF7F1] font-lato uppercase  tracking-wider font-semibold flex justify-center items-center w-full laptop:gap-10 xsPhone:gap-8 overflow-x-scroll flex-wrap">
+      <div className=" bg-[#FAF7F1] font-lato uppercase  tracking-wider font-semibold flex xsPhone:justify-start xsPhone:px-4 tablet:justify-center items-center w-full laptop:gap-10 xsPhone:gap-8 overflow-x-scroll tablet:flex-wrap">
         {categories.map((category) => {
           let imageSrc: StaticImageData = tunic;
           if (category.title === "Tunics") {

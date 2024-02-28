@@ -92,7 +92,7 @@ function CartButtons({
             onChange={(e) => setQuant(Number(e.target.value))}
           />
         </div>
-        <div className="flex xsPhone:flex-col tablet:flex-row justify-start items-start w-full gap-6">
+        <div className="flex xsPhone:flex-col laptop:flex-row justify-start items-start w-full gap-6">
           <div className="w-fit  flex justify-center items-center laptop:gap-4 tablet:gap-2 xsPhone:gap-4 flex-wrap text-xs font-lato tracking-widest">
             {product?.sizes?.map((size, index) => {
               return (
@@ -114,7 +114,7 @@ function CartButtons({
           <Button
             type="submit"
             disabled={submitting === true || !session}
-            className="tablet:w-fit xsPhone:w-full border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
+            className="laptop:w-fit xsPhone:w-full border bg-[#c58f48] hover:bg-[#ae7a36] flex justify-center items-center gap-2 text-white p-6 text-sm font-lato uppercase tracking-widest">
             {submitting ? (
               <div className="flex items-center justify-center gap-2">
                 Adding <Loader2Icon className="animate-spin" />

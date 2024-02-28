@@ -11,6 +11,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "../ui/button";
+import Image from "next/image";
+import logo from "@/public/logo.png";
 import {
   HammerIcon,
   MenuIcon,
@@ -85,12 +87,13 @@ const MobNav = ({
             "text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl",
             isSearchActive && "hidden"
           )}>
+          <Image src={logo} alt={"logo"} className="w-8 h-auto mr-3" />
           <p
             className={cn(
               " text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl ",
               isSearchActive && "hidden"
             )}>
-            Tara Textiles
+            KurtiVeda
           </p>
         </Link>
         <div

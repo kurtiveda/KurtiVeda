@@ -26,7 +26,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
-      <Header />
       <Separator />
       <div className="w-full pt-8 ">
         <BreadCrumbs customPath={["shop", `${product.Title}`]} />

@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import NavBanner from "./NavBanner";
 import Image from "next/image";
-import logo from "../public/logo.png";
+import logo from "@/public/logo.png";
 import Link from "next/link";
 
 import {
@@ -42,7 +42,7 @@ const NavBar = ({
           )}>
           <Link
             href={"/shop"}
-            className="relative py-5 font-semibold group h-full hover:text-[#A77737]"
+            className="relative py-8 font-semibold group h-full hover:text-[#A77737]"
             onClick={() =>
               localStorage.setItem("category", JSON.stringify([""]))
             }>
@@ -50,22 +50,23 @@ const NavBar = ({
           </Link>
           <Link
             href={"#"}
-            className="relative py-5 font-semibold group h-full hover:text-[#A77737]">
+            className="relative py-8 font-semibold group h-full hover:text-[#A77737]">
             <p className="nav">ABOUT</p>
           </Link>
           <Link
             href={"#"}
-            className="relative py-5 font-semibold group h-full hover:text-[#A77737]">
+            className="relative py-8 font-semibold group h-full hover:text-[#A77737]">
             <p className="nav">CONTACT</p>
           </Link>
         </div>
         <Link
           href={"/"}
-          className="w-1/3 text-center flex justify-center items-center"
+          className="w-1/3 text-center flex justify-center items-center font-lato tracking-widest"
           onClick={() =>
             localStorage.setItem("category", JSON.stringify([""]))
           }>
-          Tara Textiles
+          <Image src={logo} alt={"logo"} className="w-10 h-auto mr-2" />
+          KurtiVeda
         </Link>
         <div
           className={cn(

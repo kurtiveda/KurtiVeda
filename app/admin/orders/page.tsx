@@ -23,17 +23,16 @@ export type Orders = {
 };
 
 async function page() {
+  const session = await auth();
+  if (session?.user?.role !== "ADMIN" || !session) {
+    return <TryAgain message="You Are Not Authorized to Access this Page" />;
+  }
+
+  const orders = await axios.get(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/orders`
+  );
+  console.log("orders.data", orders.data);
   try {
-    const session = await auth();
-    if (session?.user?.role !== "ADMIN" || !session) {
-      return <TryAgain message="You Are Not Authorized to Access this Page" />;
-    }
-
-    const orders = await axios.get(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/orders`
-    );
-    console.log("orders.data", orders.data);
-
     let ordersData: Orders[] = [];
 
     let userID = "";

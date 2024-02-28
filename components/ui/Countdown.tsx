@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-// const COUNTDOWN_TARGET: any = new Date("2024-02-31T23:59:59");
-
 const getTimeLeft = (expiration: any) => {
   const now: any = new Date();
   const totalTimeLeft = expiration - now;
