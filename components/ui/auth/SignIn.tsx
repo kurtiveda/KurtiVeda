@@ -84,10 +84,10 @@ function SignIn() {
               <hr className="w-full border ml-2" />
             </div>
             <div className="w-full flex justify-center items-center">
-              <GoogleSignInButton
+              {/* <GoogleSignInButton
                 isSubmitting={isSubmitting}
                 setIsSubmitting={setIsSubmitting}
-              />
+              /> */}
             </div>
           </div>
         </div>

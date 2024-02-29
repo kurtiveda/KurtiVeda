@@ -27,25 +27,25 @@ declare module "next-auth" {
 export const { handlers, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      id: "google",
-      clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
-      clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET,
-      profile(profile) {
-        return {
-          id: profile.sub,
-          email: profile.email,
-          name: profile.name,
-          image: profile.image,
-          role: profile.role ?? Roles[1],
-        };
-      },
-      authorization: {
-        params: {
-          prompt: "consent",
-        },
-      },
-    }),
+    // GoogleProvider({
+    //   id: "google",
+    //   clientId: process.env.AUTH_GOOGLE_CLIENT_ID,
+    //   clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET,
+    //   profile(profile) {
+    //     return {
+    //       id: profile.sub,
+    //       email: profile.email,
+    //       name: profile.name,
+    //       image: profile.image,
+    //       role: profile.role ?? Roles[1],
+    //     };
+    //   },
+    //   authorization: {
+    //     params: {
+    //       prompt: "consent",
+    //     },
+    //   },
+    // }),
     EmailProvider({
       id: "resend",
       server: {
@@ -87,8 +87,8 @@ export const { handlers, auth } = NextAuth({
   },
   pages: {
     signIn: `${process.env.NEXT_PUBLIC_APP_URL}/users/sign-in`,
-    verifyRequest: `${process.env.NEXT_PUBLIC_APP_URL}/users/verify-request`,
-    error: `/users/error`,
-    newUser: `${process.env.NEXT_PUBLIC_APP_URL}/users/details`,
+    // verifyRequest: `${process.env.NEXT_PUBLIC_APP_URL}/users/verify-request`,
+    // error: `/users/error`,
+    // newUser: `${process.env.NEXT_PUBLIC_APP_URL}/users/details`,
   },
 });
