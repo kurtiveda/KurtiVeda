@@ -11,21 +11,38 @@ import MediumCards from "../Products/MediumCards";
 import Arrivals from "../Arrivals/Arrivals";
 import MobNav from "./MobNav";
 import { auth } from "@/auth";
+import axios from "axios";
 
 const Header = async () => {
   const session = await auth();
   const userId = session?.user?.id;
   const banner = await getBanner();
+  const cartNumber = await axios.get(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/cart/products`,
+    {
+      headers: {
+        userId: session?.user?.id as string,
+      },
+    }
+  );
   return (
-    <>
-      <div className="xsPhone:hidden tablet:block bg-white">
-        <NavBar userId={userId as string} banner={banner} />
+    <div>
+      <div className="xsPhone:hidden tablet:block bg-white drop-shadow-md z-[400] relative">
+        <NavBar
+          userId={userId as string}
+          banner={banner}
+          cartNumber={cartNumber?.data[0]?.products?.length}
+        />
       </div>
-      <div className="tablet:hidden xsPhone:block">
-        <MobNav userId={userId as string} banner={banner} />
+      <div className="tablet:hidden xsPhone:block bg-white drop-shadow-md z-[400] relative">
+        <MobNav
+          userId={userId as string}
+          banner={banner}
+          cartNumber={cartNumber?.data[0]?.products?.length}
+        />
       </div>
       {/* <Categories /> */}
-    </>
+    </div>
   );
 };
 

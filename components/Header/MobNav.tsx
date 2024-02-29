@@ -29,9 +29,11 @@ import { BannerType } from "@/types";
 const MobNav = ({
   userId,
   banner,
+  cartNumber = 0,
 }: {
   userId: string;
   banner: BannerType[];
+  cartNumber: number;
 }) => {
   const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
   return (
@@ -40,7 +42,7 @@ const MobNav = ({
       <div className="flex justify-between items-center p-4 ">
         <div
           className={cn(
-            "w-1/3 flex  justify-start items-center gap-4",
+            "w-1/4 flex  justify-start items-center gap-2",
             isSearchActive && "w-fit"
           )}>
           <Drawer>
@@ -54,7 +56,10 @@ const MobNav = ({
                 )}>
                 <Link
                   href={"/shop"}
-                  className="relative py-4 font-semibold group h-full hover:text-[#A77737]">
+                  className="relative py-4 font-semibold group h-full hover:text-[#A77737]"
+                  onClick={() =>
+                    localStorage.setItem("categories", JSON.stringify([""]))
+                  }>
                   <p className="nav">SHOP</p>
                 </Link>
                 <Link
@@ -73,21 +78,27 @@ const MobNav = ({
           <Link href={`/cart`} className={cn(isSearchActive && "hidden")}>
             <Button
               className={cn(
-                "bg-none hover:bg-transparent hover:scale-125 transition",
+                "bg-none hover:bg-transparent hover:scale-125 transition relative",
                 isSearchActive && "hidden"
               )}
               variant={"ghost"}>
               <ShoppingBagIcon className="w-5" />
+              <div className="absolute top-0 right-0 rounded-full bg-[#A77737] text-white px-1 text-xs">
+                {cartNumber}
+              </div>
             </Button>
           </Link>
         </div>
         <Link
           href={"/"}
+          onClick={() =>
+            localStorage.setItem("categories", JSON.stringify([""]))
+          }
           className={cn(
-            "text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl",
+            "text-center w-fit flex justify-center items-center font-lato uppercase font-light text-xl",
             isSearchActive && "hidden"
           )}>
-          <Image src={logo} alt={"logo"} className="w-8 h-auto mr-3" />
+          <Image src={logo} alt={"logo"} className="w-6 h-auto mr-6" />
           <p
             className={cn(
               " text-center w-1/2 flex justify-center items-center font-lato uppercase font-light text-xl ",

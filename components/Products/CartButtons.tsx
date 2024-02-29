@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { Session } from "next-auth";
 import WhatsAppButton from "../ui/Whatsapp";
+import { useRouter } from "next/navigation";
 
 function CartButtons({
   product,
@@ -26,6 +27,7 @@ function CartButtons({
   const [size, setSize] = useState("");
   const [active, setActive] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setSize("");
@@ -66,6 +68,7 @@ function CartButtons({
       setQuant(1);
       setActive("");
       setSubmitting(false);
+      router.refresh();
     }
   }
   return (

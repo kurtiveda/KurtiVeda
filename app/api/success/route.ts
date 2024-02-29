@@ -7,9 +7,8 @@ import { prisma } from "@/prisma/index";
 export async function POST(req: Request, res: NextResponse) {
   const { transaction, userId } = await req.json();
   const merchantId = process.env.NEXT_PUBLIC_MID;
-  console.log(merchantId);
+
   const transactionId = transaction;
-  console.log(transactionId);
 
   const st =
     `/pg/v1/status/${merchantId}/${transactionId}` +
@@ -18,7 +17,6 @@ export async function POST(req: Request, res: NextResponse) {
   const dataSha256 = sha256(st);
 
   const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
-  console.log(checksum);
 
   const options = {
     method: "get",

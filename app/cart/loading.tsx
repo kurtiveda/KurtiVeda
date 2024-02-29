@@ -12,7 +12,7 @@ function loading() {
   return (
     <>
       <Header />
-      <hr />
+      {/* <hr /> */}
       <div className="py-10">
         <p className="font-playfair text-3xl w-full text-center pb-10">
           Your Bag

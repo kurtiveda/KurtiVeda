@@ -10,6 +10,8 @@ import MadeInIndia from "@/components/Footers/MadeInIndia";
 import Footer from "@/components/Footers/Footer";
 import Countdown from "@/components/ui/Countdown";
 import CountDownCarousel from "@/components/PromoCode/CountDownCarousel";
+import axios from "axios";
+import { auth } from "@/auth";
 
 export default async function Home() {
   const BannerImages: BannerType[] = await getBanner();
@@ -21,6 +23,8 @@ export default async function Home() {
       images[index] = image.asset.url;
     });
   });
+
+  const session = await auth();
 
   const categories = await getCategory();
   console.log(categories);

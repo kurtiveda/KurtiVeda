@@ -39,7 +39,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       },
     });
 
-    if (userPromo?.promoUsed === true) {
+    if (userPromo?.promoUsed === true && promoCode.usageLimit === 1) {
       return NextResponse.json({
         error: "You have Already Used this Promo Code",
       });

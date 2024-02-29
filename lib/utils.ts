@@ -98,16 +98,13 @@ export async function makePayment(
   };
 
   const dataPayload = JSON.stringify(payload);
-  console.log(dataPayload);
 
   const dataBase64 = Buffer.from(dataPayload).toString("base64");
-  console.log(dataBase64);
 
   const fullURL = dataBase64 + "/pg/v1/pay" + process.env.NEXT_PUBLIC_SALT_KEY;
   const dataSha256 = sha256(fullURL);
 
   const checksum = dataSha256 + "###" + process.env.NEXT_PUBLIC_SALT_INDEX;
-  console.log("c===", checksum);
 
   const UAT_PAY_API_URL =
     "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay";

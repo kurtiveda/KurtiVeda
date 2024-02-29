@@ -20,7 +20,7 @@ async function page() {
     return (
       <div>
         <Header />
-        <hr />
+        {/* <hr /> */}
         <p className="font-playfair text-4xl w-full text-center py-10">Cart</p>
         <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
           You Need to Login First <LockIcon />
@@ -42,10 +42,12 @@ async function page() {
     return (
       <div>
         <Header />
-        <hr />
-        <p className="font-playfair text-4xl w-full text-center py-10">Cart</p>
-        <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
-          Cart is Empty
+        {/* <hr /> */}
+        <p className="font-playfair text-4xl w-full text-center py-10">
+          Your Bag
+        </p>
+        <div className="flex justify-center items-start w-full text-center laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
+          Your Bag is Empty
         </div>
       </div>
     );
@@ -80,11 +82,11 @@ async function page() {
     return (
       <div>
         <Header />
-        <hr />
+        {/* <hr /> */}
         <p className="font-playfair text-3xl w-full text-center py-10">
           Your Bag
         </p>
-        <div className="flex justify-center items-start laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
+        <div className="flex justify-center items-center laptop:flex-row xsPhone:flex-col uppercase font-lato tracking-wider text-muted-foreground/40">
           Your Bag is Empty
         </div>
       </div>
@@ -94,7 +96,7 @@ async function page() {
   return (
     <>
       <Header />
-      <hr />
+      {/* <hr /> */}
       <div className="py-10">
         <p className="font-playfair text-3xl w-full text-center pb-10">
           Your Bag

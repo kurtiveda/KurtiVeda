@@ -26,9 +26,11 @@ import { BannerType } from "@/types";
 const NavBar = ({
   userId,
   banner,
+  cartNumber = 0,
 }: {
   userId: string;
   banner: BannerType[];
+  cartNumber: number;
 }) => {
   const [isSearchActive, setIsSearchActive] = useState<Boolean>(false);
 
@@ -44,7 +46,7 @@ const NavBar = ({
             href={"/shop"}
             className="relative py-8 font-semibold group h-full hover:text-[#A77737]"
             onClick={() =>
-              localStorage.setItem("category", JSON.stringify([""]))
+              localStorage.setItem("categories", JSON.stringify([""]))
             }>
             <p className="nav">SHOP</p>
           </Link>
@@ -63,7 +65,7 @@ const NavBar = ({
           href={"/"}
           className="w-1/3 text-center flex justify-center items-center font-lato tracking-widest"
           onClick={() =>
-            localStorage.setItem("category", JSON.stringify([""]))
+            localStorage.setItem("categories", JSON.stringify([""]))
           }>
           <Image src={logo} alt={"logo"} className="w-10 h-auto mr-2" />
           KurtiVeda
@@ -75,11 +77,14 @@ const NavBar = ({
           <Link href={`/cart`}>
             <Button
               className={cn(
-                "bg-none hover:bg-transparent hover:scale-125 transition",
+                "bg-none hover:bg-transparent hover:scale-125 transition relative",
                 isSearchActive && "hidden"
               )}
               variant={"ghost"}>
-              <ShoppingBagIcon className="w-5 mr-2" />
+              <ShoppingBagIcon className="w-5 " />
+              <div className="absolute top-0 right-0 rounded-full bg-[#A77737] text-white px-1 text-xs">
+                {cartNumber}
+              </div>
             </Button>
           </Link>
           <Button

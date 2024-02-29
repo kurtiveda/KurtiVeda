@@ -18,7 +18,7 @@ function UserAuthOptions() {
       <DropdownMenuTrigger className="rounded-full px-2 py-2 bg-[#A77737]">
         <UserIcon className="w-6 h-6 text-white" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="z-[400] relative">
         <DropdownMenuLabel>
           <Link href={`/users/manage`}>My Account</Link>
         </DropdownMenuLabel>

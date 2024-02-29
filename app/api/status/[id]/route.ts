@@ -40,13 +40,13 @@ export async function POST(req: Request, res: NextResponse) {
   // return NextResponse.json(response.data.code);
   if (response.data.code == "PAYMENT_SUCCESS") {
     return NextResponse.redirect(
-      `http://localhost:3000/success/${transactionId}`,
+      `${process.env.NEXT_PUBLIC_APP_URL}/success/${transactionId}`,
       {
         status: 301,
       }
     );
   } else {
-    return NextResponse.redirect("http://localhost:3000/failure", {
+    return NextResponse.redirect(`${process.env.NEXT_PUBLIC_APP_URL}/failure`, {
       status: 301,
     });
   }
