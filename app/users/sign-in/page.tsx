@@ -5,23 +5,13 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/prisma";
 
 async function page() {
-  const session = await auth();
+  // const session = await auth();
 
-  const isGuest = await prisma.user.findFirst({
-    where: {
-      Active: true,
-    },
-  });
+  // if (session?.user?.id) {
+  //   redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
+  // }
 
-  if (session?.user?.id || isGuest) {
-    redirect(`${process.env.NEXT_PUBLIC_APP_URL}`);
-  }
-
-  return (
-    <div>
-      <SignIn />
-    </div>
-  );
+  return <div>hi</div>;
 }
 
 export default page;
